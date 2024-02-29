@@ -1,5 +1,6 @@
 package arden.solver.equation.methods;
 
+import arden.solver.equation.exceptions.RootSegmentException;
 import arden.solver.equation.functions.Function;
 import arden.solver.equation.models.Solution;
 import static arden.solver.equation.utils.EquationPrinter.*;
@@ -15,6 +16,10 @@ public class NewtonMethod implements Method {
     public Solution solve(Function function, double a, double b, double accuracy) {
         StringBuilder steps = new StringBuilder();
         steps.append(getHeaderForNewtonMethod()).append("\n");
+
+        if (checkEffectiveness(function,a,b)) {
+            printString("Производные монотонны, метод будет эффективен");
+        }
 
         double x = approximation(function, a, b);
         double xNext = x + 1;
@@ -35,10 +40,34 @@ public class NewtonMethod implements Method {
         return new Solution(xNext, function.value(xNext), iterations, steps.toString());
     }
 
+    private boolean checkEffectiveness(Function function, double a, double b) {
+        double sign = function.derivative(a);
+        for (double i = a; i < b; i += 0.01) {
+
+            if (function.derivative(i) == 0) {
+                printString("Производная равна нулю, нет гарантии эффективности");
+                return false;
+            }
+            if (sign * function.derivative(i) < 0 ) {
+                printString("Производная меняет знак, нет гарантии эффективности метода");
+                return false;
+            }
+        }
+
+        sign = function.secondDerivative(a);
+        for (double i = a; i < b; i += 0.01) {
+            if (sign * function.secondDerivative(i) < 0) {
+                printString("Вторая производная меняет знак, нет гарантии эффективности метода");
+                return false;
+            }
+        }
+
+        return true;
+    }
     private double approximation(Function function, double a, double b) {
-        if (function.value(a) * function.secondDerivative(a) > 0) {
+        if (function.value(a) * function.secondDerivative(a) > 0 && function.derivative(a) != 0) {
             return a;
-        } else if (function.value(b) * function.secondDerivative(b) > 0) {
+        } else if (function.value(b) * function.secondDerivative(b) > 0 && function.derivative(b) != 0) {
             return b;
         } else {
             printString("Сходимость метода не гарантирована, в качестве приближения будет выбрана середина интервала");
