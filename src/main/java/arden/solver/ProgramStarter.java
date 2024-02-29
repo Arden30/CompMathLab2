@@ -47,9 +47,9 @@ public class ProgramStarter {
                         SimpleIterations simpleIterations = new SimpleIterations();
                         SolutionSystem solution = simpleIterations.solve(taskSystem.systemOfEquations(), taskSystem.x(), taskSystem.y(), taskSystem.accuracy());
 
-                        int f = readFormatOutput();
-                        outputSystem(f, solution);
+                        outputSystem(readFormatOutput(), solution);
                     }
+                    default -> throw new Exception("Такого номера нет, попробуйте ещё раз");
                 }
 
                 if (scanner.hasNext()) {
@@ -58,6 +58,7 @@ public class ProgramStarter {
 
             } catch (Exception e) {
                 printString(e.getMessage());
+                scanner.next();
             }
         }
     }
@@ -66,7 +67,15 @@ public class ProgramStarter {
         while (true) {
             try {
                 printString("Выберите задачу, которую хотите решить: уравнение методом на выбор (введите 1) или система уравнений методом простых итераций (введите 2)");
-                return scanner.nextInt();
+                int sysOrEq = scanner.nextInt();
+
+                if (sysOrEq != 1 && sysOrEq != 2) {
+                    throw new IllegalArgumentException("Такого номера нет, попробуйте ещё раз");
+                }
+
+                return sysOrEq;
+            } catch (IllegalArgumentException e) {
+                printString(e.getMessage());
             } catch (Exception e) {
                 printString("Ошибка ввода формата, попробуйте ещё раз");
                 scanner.next();
@@ -119,7 +128,15 @@ public class ProgramStarter {
         while (true) {
             try {
                 printString("Выберите формат ввода: консоль (введите 1) или файл (введите 2)");
-                return scanner.nextInt();
+                int format = scanner.nextInt();
+
+                if (format != 1 && format != 2) {
+                    throw new IllegalArgumentException("Такого номера нет, попробуйте ещё раз");
+                }
+
+                return format;
+            } catch (IllegalArgumentException e) {
+                printString(e.getMessage());
             } catch (Exception e) {
                 printString("Ошибка ввода формата, попробуйте ещё раз");
                 scanner.next();
@@ -153,7 +170,15 @@ public class ProgramStarter {
         while (true) {
             try {
                 printString("Выберите формат вывода: консоль (введите 1) или файл (введите 2)");
-                return scanner.nextInt();
+                int format = scanner.nextInt();
+
+                if (format != 1 && format != 2) {
+                    throw new IllegalArgumentException("Такого номера нет, попробуйте ещё раз");
+                }
+
+                return format;
+            } catch (IllegalArgumentException e) {
+                printString(e.getMessage());
             } catch (Exception e) {
                 printString("Ошибка ввода формата, попробуйте ещё раз");
                 scanner.next();

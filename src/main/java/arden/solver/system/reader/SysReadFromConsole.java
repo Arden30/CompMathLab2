@@ -89,7 +89,6 @@ public class SysReadFromConsole implements SysReadable {
                 scanner.next();
             } catch (IndexOutOfBoundsException e) {
                 printString("Такого номера нет, попробуйте ещё раз");
-                scanner.next();
             }
         }
     }

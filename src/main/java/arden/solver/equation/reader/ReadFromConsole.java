@@ -57,7 +57,7 @@ public class ReadFromConsole implements Readable {
                 scanner.next();
             } catch (IndexOutOfBoundsException e) {
                 printString("Такого номера нет, попробуйте ещё раз");
-                scanner.next();
+//                scanner.next();
             }
         }
     }
