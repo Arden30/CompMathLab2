@@ -1,6 +1,5 @@
 package arden.solver.equation.methods;
 
-import arden.solver.equation.exceptions.RootSegmentException;
 import arden.solver.equation.functions.Function;
 import arden.solver.equation.models.Solution;
 import static arden.solver.equation.utils.EquationPrinter.*;

@@ -16,10 +16,6 @@ public class SystemPrinter {
 
     }
 
-//    public static void printString(String s) {
-//        System.out.println(s);
-//    }
-
     public static void printSystems(List<SystemOfEquations> list) {
         printString("Выберите одну из систем для поиска корней (введите её номер):");
         for (int i = 0; i < list.size(); i++) {
