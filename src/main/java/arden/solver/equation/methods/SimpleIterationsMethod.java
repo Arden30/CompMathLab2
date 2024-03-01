@@ -19,13 +19,16 @@ public class SimpleIterationsMethod implements Method {
         Function phi = getPhi(function, lambda);
         converges(function, a, b, lambda);
         double x = a;
-        double xNext = a + 1;
+        double xNext = a + 100;
         int iterations = 0;
         StringBuilder steps = new StringBuilder();
         steps.append(getHeaderForSimpleIterationsMethod()).append("\n");
 
-        while (abs(xNext - x) > accuracy) {
-            if (xNext != a + 1) {
+        printString("фи в точке а " + phi.derivative(a));
+        printString("фи в точке b " + phi.derivative(b));
+
+        while (abs(xNext - x) > accuracy || abs(function.value(xNext)) > accuracy) {
+            if (xNext != a + 100) {
                 x = xNext;
             }
 

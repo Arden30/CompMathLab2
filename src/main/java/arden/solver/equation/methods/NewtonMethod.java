@@ -24,7 +24,7 @@ public class NewtonMethod implements Method {
         double xNext = x + 1;
         int iterations = 0;
 
-        while (abs(xNext - x) > accuracy && abs(function.value(x)) > accuracy) {
+        while (abs(xNext - x) > accuracy || abs(function.value(x)) > accuracy) {
             if (xNext != x + 1) {
                 x = xNext;
             }
@@ -64,14 +64,13 @@ public class NewtonMethod implements Method {
         return true;
     }
     private double approximation(Function function, double a, double b) {
-        if (function.value(a) * function.secondDerivative(a) > 0 && function.derivative(a) != 0) {
+        if (function.value(a) * function.secondDerivative(a) > 0) {
             return a;
-        } else if (function.value(b) * function.secondDerivative(b) > 0 && function.derivative(b) != 0) {
+        } else if (function.value(b) * function.secondDerivative(b) > 0) {
             return b;
-        } else {
-            printString("Сходимость метода не гарантирована, в качестве приближения будет выбрана середина интервала");
-            return (a + b) / 2;
         }
+
+        return a;
     }
 
     private double countNext(Function function, double x) {

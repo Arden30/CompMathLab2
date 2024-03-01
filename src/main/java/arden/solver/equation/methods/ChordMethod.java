@@ -16,12 +16,12 @@ public class ChordMethod implements Method {
         StringBuilder steps = new StringBuilder();
         steps.append(getHeaderForChordMethod()).append("\n");
 
-        double xNext = a + 1;
+        double xNext = a + 100;
         double x = a;
         int iterations = 0;
 
-        while (abs(xNext - x) > accuracy) {
-            if (xNext != a + 1) {
+        while (abs(xNext - x) > accuracy || abs(function.value(xNext)) > accuracy) {
+            if (xNext != a + 100) {
                 x = xNext;
             }
             xNext = countNext(function, a, b);

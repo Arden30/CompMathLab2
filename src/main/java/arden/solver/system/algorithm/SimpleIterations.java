@@ -38,14 +38,12 @@ public class SimpleIterations {
             steps.append(getRowForSimpleIterationsSystemMethod(xNext, x, yNext, y)).append("\n");
 
             iterations++;
-        } while (abs(xNext - x) > accuracy && abs(yNext - y) > accuracy);
+        } while (abs(xNext - x) > accuracy || abs(yNext - y) > accuracy);
 
         return new SolutionSystem(x, y, iterations, inaccuracyX, inaccuracyY, steps.toString());
     }
 
     private void converges(Function varX, Function varY, double x, double y) {
-
-
         double first = abs(varX.derivativeX(x, y)) + abs(varX.derivativeY(x, y));
         double second = abs(varY.derivativeX(x, y)) + abs(varY.derivativeY(x, y));
 

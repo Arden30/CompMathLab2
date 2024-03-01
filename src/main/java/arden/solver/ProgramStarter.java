@@ -47,7 +47,7 @@ public class ProgramStarter {
                         SimpleIterations simpleIterations = new SimpleIterations();
                         SolutionSystem solution = simpleIterations.solve(taskSystem.systemOfEquations(), taskSystem.x(), taskSystem.y(), taskSystem.accuracy());
 
-                        outputSystem(readFormatOutput(), solution);
+                        outputSystem(readFormatOutput(), solution, taskSystem);
                     }
                     default -> throw new Exception("Такого номера нет, попробуйте ещё раз");
                 }
@@ -155,9 +155,9 @@ public class ProgramStarter {
         }
     }
 
-    private void outputSystem(int format, SolutionSystem solution) throws Exception {
+    private void outputSystem(int format, SolutionSystem solution, TaskSystem system) throws Exception {
         switch (format) {
-            case 1 -> printSystemSolutionInConsole(solution);
+            case 1 -> printSystemSolutionInConsole(solution, system);
             case 2 -> {
                 Path path = readPath();
                 printSystemSolutionInFile(solution, path);

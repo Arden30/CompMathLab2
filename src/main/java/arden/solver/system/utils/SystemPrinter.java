@@ -1,6 +1,7 @@
 package arden.solver.system.utils;
 
 import arden.solver.system.models.SolutionSystem;
+import arden.solver.system.models.TaskSystem;
 import arden.solver.system.systems.SystemOfEquations;
 
 import java.io.BufferedWriter;
@@ -23,13 +24,15 @@ public class SystemPrinter {
         }
     }
 
-    public static void printSystemSolutionInConsole(SolutionSystem solutionSystem) {
+    public static void printSystemSolutionInConsole(SolutionSystem solutionSystem, TaskSystem system) {
         printString(solutionSystem.steps());
         printString("x = " + String.format("%.5f", solutionSystem.x()));
         printString("y = " + String.format("%.5f", solutionSystem.y()));
         printString("Число итераций: " + solutionSystem.iterations());
         printString("Вектор погрешности X: " + String.format("%.5f", solutionSystem.inaccuracyX()));
         printString("Вектор погрешности Y: " + String.format("%.5f", solutionSystem.inaccuracyY()));
+        printString("Первая функция: " + String.format("%.15f", system.systemOfEquations().first().value(solutionSystem.x(), solutionSystem.y())));
+        printString("ВТорая функция: " + String.format("%.15f", system.systemOfEquations().second().value(solutionSystem.x(), solutionSystem.y())));
     }
 
     public static void printSystemSolutionInFile(SolutionSystem solutionSystem, Path path) {

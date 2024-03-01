@@ -42,6 +42,7 @@ public class EquationPrinter {
                 + String.format("%" + 11 + "s", "") + "x"
                 + String.format("%" + 9 + "s", "") + "F(a)"
                 + String.format("%" + 9 + "s", "") + "F(b)"
+                + String.format("%" + 9 + "s", "") + "F(x)"
                 + String.format("%" + 7 + "s", "") + "|x(k+1) - x(k)|";
     }
 
@@ -51,6 +52,7 @@ public class EquationPrinter {
                 + String.format("%" + 5 + "s", "") + String.format("%.5f", xNext)
                 + String.format("%" + 5 + "s", "") + String.format("%.5f", function.value(a))
                 + String.format("%" + 5 + "s", "") + String.format("%.5f", function.value(b))
+                + String.format("%" + 5 + "s", "") + String.format("%.5f", function.value(xNext))
                 + String.format("%" + 5 + "s", "") + String.format("%.5f", abs(xNext - x));
     }
 
@@ -85,8 +87,8 @@ public class EquationPrinter {
     }
     public static void printSolutionInConsole(Solution solution) {
         printString(solution.steps());
-        printString("Корень: " + String.format("%.5f", solution.x()));
-        printString("Значение функции: " + String.format("%.5f", solution.f_x()));
+        printString("Корень: " + String.format("%.15f", solution.x()));
+        printString("Значение функции: " + String.format("%.15f", solution.f_x()));
         printString("Число итераций: " + solution.iterations());
     }
 
