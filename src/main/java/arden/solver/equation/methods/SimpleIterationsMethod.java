@@ -24,9 +24,6 @@ public class SimpleIterationsMethod implements Method {
         StringBuilder steps = new StringBuilder();
         steps.append(getHeaderForSimpleIterationsMethod()).append("\n");
 
-        printString("фи в точке а " + phi.derivative(a));
-        printString("фи в точке b " + phi.derivative(b));
-
         while (abs(xNext - x) > accuracy || abs(function.value(xNext)) > accuracy) {
             if (xNext != a + 100) {
                 x = xNext;
