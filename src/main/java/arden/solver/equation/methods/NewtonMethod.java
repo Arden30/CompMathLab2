@@ -53,6 +53,11 @@ public class NewtonMethod implements Method {
             }
         }
 
+        if (function.derivative(b) == 0) {
+            printString("Производная равна нулю, нет гарантии эффективности");
+            return false;
+        }
+
         sign = function.secondDerivative(a);
         for (double i = a; i < b; i += 0.01) {
             if (sign * function.secondDerivative(i) < 0) {
